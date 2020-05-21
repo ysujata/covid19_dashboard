@@ -34,7 +34,7 @@ def show_charts():
             india_total_cases_c1=india_total_cases, india_states_cases_c1=india_states_cases
     )
 
-
+    #pipreqs <root_folder_name> generates only the required dependencies
     # return render_template('index.html',  world_reported_deaths_c1=world_reported_deaths)
     # return render_template('index.html',  india_summary_c1=india_summary)
     #basic
