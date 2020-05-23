@@ -42,8 +42,25 @@
             <td><div id="world_summary_chart" style="width: 450px; height: 500px;">{{world_confirmed_cases_c1 | safe}}</div></td>
             <td><div id="world_summary_table" style="width: 450px; height: 500px;">{{world_reported_deaths_c1 | safe}} </div></td>
         </tr>
-   </table>
+    </table>
+    <p class='text1'>Global deaths linked to the novel coronavirus passed over 300,000. While reported cases 
+        of the virus are over 5 million. About half of the deaths have been reported by the United States, the United Kingdom and
+        Italy.<br>
+        The first death linked to the disease was reported on January 10 in Wuhan, China.
+        It took 91 days for the death toll to pass 1,00,000 and a further 16 days to reach 2,00,000.It took 19 days to go from 200,000 
+        to 300,000 deaths.
+    </p>    
 
+    <h2 class="table-heading"><u>Trend of COVID-19 in India</u></h2>
+    <div class="plots">
+        {{india_total_cases_c1 | safe}}
+        
+        <p class="text1">Though being highly populated the relative confimred cases of India is low compared to other countries. 
+         This could be because of two reasons: 21 day lockdown imposed by prime minister Narendra Modi at the critical time
+         and Low testing rate
+      </p>   
+     </div>
+  
    <h2 class="table-heading"><u>India - COVID-19 Statewise Status (Real-time)</u></h2>
    <div class="plots">
        {{india_states_table_t1 | safe}}
@@ -52,19 +69,21 @@
    <h2 class="table-heading"><u>Covid-19 spread across the states in India</u></h2>
    <div class="plots">
        {{ india_states_cases_c1 | safe}}
-   </div>
-
+ 
+       <p class='text1'> Maharashtra is leading. According to the health department officials of Maharashtra, 
+        Intensive contact tracing, testing and quarantining of high-risk individuals has contributed to the consistently 
+        high numbers.</p>
+    </div>
+ 
    <h2 class="table-heading"><u>India - Age-Group wise distribution of COVID-19</u></h2>
    <div class="plots">
        {{india_agewise_c1 | safe}}
-   </div>
 
-   <h2 class="table-heading"><u>Trend of COVID-19 in India</u></h2>
-   <div class="plots">
-       {{india_total_cases_c1 | safe}}
-   </div>
-   
-   <p class="text1">Journey of different Countries in COVID-19. <br>
+       <p class='text1'>We could see that the age group less than 40 years old is the most affected which is against the trend which says elderly people are 
+        more at risk of being affected. Only 17% of people above 60 years are affected.</p>    
+    </div>
+ 
+    <p class="text1">Journey of different Countries in COVID-19. <br>
     When we see daily news reports on COVID-19 it's really hard to interpret what's actually happening, 
     since the numbers are changing so rapidly but that's something expected from Exponential growth. 
     Since almost all the pandemics tend to grow exponentially it's really hard to understand for someone from a non-mathematical or
