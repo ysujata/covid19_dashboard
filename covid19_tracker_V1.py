@@ -486,7 +486,8 @@ class Covid19Tracker:
     def plot_india_age_group(self):
         #Dataset source: https://www.kaggle.com/sudalairajkumar/covid19-in-india
         df=pd.read_csv(r"AgeGroupDetails.csv")
-        fig = px.pie(df, values='Percentage', names='AgeGroup', 
+        df1= df.rename(index = {"Oct-19": "10-19"}) 
+        fig = px.pie(df1, values='Percentage', names='AgeGroup', 
                  #title="India - Age-Group wise distribution of COVID-19",
                  hole=0.5
                  )
