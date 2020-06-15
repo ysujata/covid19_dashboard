@@ -1,100 +1,137 @@
-{% include 'base.html' %}
 
-{% block title %}  {% endblock %}
-{% block content %}
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-<h3 class="table-heading">Analysing COVID-19 Data. Last updated on 16 May 2020</h3> 
-<div class="page">
-    
-    <p class="text1"> COVID-19 is a respiratory illness caused by a family of viruses. Symptoms include fever,
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='w3.css') }}">
+    <title>COVID-19 Dashboard</title>
+</head>
+
+<body>
+<header class="w3-container w3-red w3-center">
+    <h3 style="color:white"><br>Coronovirus Disease (COVID-19) Dashboard<br><br></h3>
+</header>
+
+<div class="w3-container w3-center w3-content" >
+    <p class="w3-justify"><br><br> COVID-19 is a respiratory illness caused by a family of viruses. Symptoms include fever,
         coughing, sore throat and shortness of breath ranging from mild to very severe conditions. 
         It is a contiguous virus which started from Wuhan in December 2019.
         WHO later declared it as Pandemic due to high rate spreads throughout the world.<br>
-        COVID-19 spreads faster than other diseases, like common cold. Every virus has Basic 
-        Reproduction number (R0) which implies how many people will get the disease from the infected person. 
-        As per inital reseach work, R0 of COVID-19 is 2.7.<br>  
+        COVID-19 spreads faster than other diseases, like common cold. 
         Currently the goal of all scientists around the world is to "Flatten the Curve". 
         Currently, COVID-19 has exponential growth rate around the world which we will be seeing in the analysis ahead. 
-        "Flattening the Curve" typically implies that, even if Confirmed Cases are increasing, the distribution of 
-        those cases should be over a longer timestamp. Suppose COVID-19 is infecting 100K people, 
-        then those many people should be infected in 1 year and not in a month. </p>
-   <p class="text1">Every Pandemic has four stages: <br>
-   Stage 1: Confirmed Cases come from other countries<br>
-   Stage 2: Local Transmission Begins<br>
-   Stage 3: Communities impacted with local transimission<br>
-   Stage 4: Significant Transmission with no end in sight<br>
-   USA is currently leading in Stage 4. While India is in on the edge of Stage 3.</p>
-   
-   <h2 class="table-heading"><u>Coronavirus Cases (Real-time)</u></h2>
-   <table id="summary2">
-        <tr>
-            <td><div id="world_summary_chart" style="width: 450px; height: 500px;">{{world_summary_c1 | safe}}</div></td>
-            <td><div id="world_summary_table" style="width: 450px; height: 500px;">{{india_summary_c1 | safe}} </div></td>
-    </tr>
-   </table>
- 
-   <h2 class="table-heading"><u>Countries leading in confirmed cases and reported deaths (Real-time)</u></h2>
-   <table id="summary2">
-        <tr>
-            <td><div id="world_summary_chart" style="width: 450px; height: 500px;">{{world_confirmed_cases_c1 | safe}}</div></td>
-            <td><div id="world_summary_table" style="width: 450px; height: 500px;">{{world_reported_deaths_c1 | safe}} </div></td>
-        </tr>
-    </table>
-    <p class='text1'>Global deaths linked to the novel coronavirus passed over 300,000. While reported cases 
-        of the virus are over 5 million. About half of the deaths have been reported by the United States, the United Kingdom and
-        Italy.<br>
-        The first death linked to the disease was reported on January 10 in Wuhan, China.
+        Every Pandemic has four stages: <br>
+        Stage 1: Confirmed Cases come from other countries<br>
+        Stage 2: Local Transmission Begins<br>
+        Stage 3: Communities impacted with local transimission<br>
+        Stage 4: Significant Transmission with no end in sight<br>
+        USA is currently leading in Stage 4. While India is in on the edge of Stage 3.</p>
+</div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">Coronavirus Cases (Real-time)<br><br></h2>
+    <div class = "w3-half">
+        <div class = "w3-card">
+            {{world_summary_c1 | safe}}
+        </div>
+    </div>
+
+    <div class = "w3-half">
+        <div class = "w3-card">
+            {{india_summary_c1 | safe}}
+        </div>
+    </div>
+</div>
+
+<div><br><br></div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">Countries leading in confirmed cases and reported deaths (Real-time)<br><br></h2>
+    <div class = "w3-half">
+        <div class = "w3-card">
+            {{world_confirmed_cases_c1 | safe }}
+        </div>
+    </div>
+
+    <div class = "w3-half">
+        <div class = "w3-card">
+            {{world_reported_deaths_c1 | safe}}
+        </div>
+    </div>
+    <div class = "w3-container">
+        <p> The first death linked to the disease was reported on January 10 in Wuhan, China.
         It took 91 days for the death toll to pass 1,00,000 and a further 16 days to reach 2,00,000.It took 19 days to go from 200,000 
         to 300,000 deaths.
-    </p>    
+        </p> 
+    </div>   
+</div>
 
-    <h2 class="table-heading"><u>Trend of COVID-19 in India</u></h2>
-    <div class="plots">
+<div><br><br></div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">Trend of COVID-19 in India<br><br></h2>
+    <div class = "w3-card">
         {{india_total_cases_c1 | safe}}
-        
-        <p class="text1">Though being highly populated the relative confimred cases of India is low compared to other countries. 
-         This could be because of two reasons: 21 day lockdown imposed by prime minister Narendra Modi at the critical time
-         and Low testing rate
-      </p>   
-     </div>
-  
-   <h2 class="table-heading"><u>India - COVID-19 Statewise Status (Real-time)</u></h2>
-   <div class="plots">
-       {{india_states_table_t1 | safe}}
-   </div>   
+    </div>
+   <div class = "w3-container">
+    <p class="w3-small">Source last updated on 16 May 2020 </p>   
+    <p>Though being highly populated the relative confimred cases of India is low compared to other countries. 
+    This could be because of two reasons: Lockdown imposed by prime minister Narendra Modi at the critical time
+    and Low testing rate</p>
+   </div>
+</div>
 
-   <h2 class="table-heading"><u>Covid-19 spread across the states in India</u></h2>
-   <div class="plots">
-       {{ india_states_cases_c1 | safe}}
- 
-       <p class='text1'> Maharashtra is leading. According to the health department officials of Maharashtra, 
+<div><br></div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">India - COVID-19 Statewise Status (Real-time)<br><br></h2>
+    <div class = "w3-card">
+        {{india_states_table_t1 | safe}}
+    </div>
+ </div>  
+
+<div><br><br></div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">Covid-19 spread across the states in India<br><br></h2>
+    <div class = "w3-card">
+        {{india_states_cases_c1 | safe}}
+    </div>
+   <div class = "w3-container">
+    <p>Maharashtra is leading. According to the health department officials of Maharashtra, 
         Intensive contact tracing, testing and quarantining of high-risk individuals has contributed to the consistently 
-        high numbers.</p>
-    </div>
- 
-   <h2 class="table-heading"><u>India - Age-Group wise distribution of COVID-19</u></h2>
-   <div class="plots">
-       {{india_agewise_c1 | safe}}
+        high numbers</p>
+   </div>
+</div>
 
-       <p class='text1'>We could see that the age group less than 40 years old is the most affected which is against the trend which says elderly people are 
-        more at risk of being affected. Only 17% of people above 60 years are affected.</p>    
+<div><br></div>
+
+<div class="w3-row-padding w3-margin-top">
+    <h2 class= "w3-center w3-text-red">India - Age-Group wise distribution of COVID-19<br><br></h3>
+    <div class = "w3-card">
+        {{india_agewise_c1 | safe}}
     </div>
- 
-    <p class="text1">Journey of different Countries in COVID-19. <br>
+   <div class = "w3-container">
+    <p class="w3-small">Source last updated on 16 May 2020 </p>
+   </div>
+</div>
+
+<div class = "w3-container">
+    <p>Journey of different Countries in COVID-19. <br>
     When we see daily news reports on COVID-19 it's really hard to interpret what's actually happening, 
     since the numbers are changing so rapidly but that's something expected from Exponential growth. 
     Since almost all the pandemics tend to grow exponentially it's really hard to understand for someone from a non-mathematical or
     non-statistical background. We are more concerned about how we are doing and where we are heading in this pandemic rather than 
     just looking at those exponentially growing numbers. The growth won't be exponentially forever. 
-    At some point of time the curve will become flat. We humans will be able to control this pandemic like we did in the past.</p>
-
-   <p class="text1">Working on refining this page and will continue to analyze COVID-19 data and update here.</p>
+    At some point of time the curve will become flat. We humans will be able to control this pandemic like we did in the 
+    past.<br><br></p>
 </div>
-{% endblock %}
 
-{% block body %}
-    
-{% endblock %}
+<footer class="w3-container w3-red w3-margin-top">
+    <p>Developed by <a href="https://www.github.com/ysujata">Sujata</a> as a part of COVID-19 Data Analytics project for <a href="https://www.aimlcommunity.com">AIML Community</a> on 21 May 2020 </p>
+  </footer>
+</body>
+
+</html>
