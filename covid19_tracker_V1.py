@@ -335,6 +335,7 @@ class Covid19Tracker:
             state_total_cases=[]
             state_total_cured=[]
             state_total_deaths=[]
+            state_active_cases=[]
             india_states_table = soup.find("table", class_="table table-striped")
             rows=india_states_table.find_all("tr")[1:34]
             #display(rows)
@@ -342,25 +343,23 @@ class Covid19Tracker:
                 col=row.find_all("td")
                 #display(col[1].text, col[2].text, col[3].text, col[4].text)
                 state_names.append(col[1].text.strip().replace('#','').replace(',','').replace('+',''))
-                state_total_cases.append(col[2].text.strip().replace('#','').replace(',','').replace('+',''))
+                state_active_cases.append(col[2].text.strip().replace('#','').replace(',','').replace('+',''))
                 state_total_cured.append(col[3].text.strip().replace('#','').replace(',','').replace('+',''))
+                state_total_cases.append(col[5].text.strip().replace('#','').replace(',','').replace('+',''))
                 state_total_deaths.append(col[4].text.strip().replace('#','').replace(',','').replace('+',''))
 
-            self.df_indian_states = pd.DataFrame(list(zip(state_names, state_total_cases, state_total_cured,  state_total_deaths)),
-                                                 columns=["States","Total_Cases", "Recovered", "Deaths"])
+            self.df_indian_states = pd.DataFrame(list(zip(state_names, state_total_cases, state_active_cases, state_total_cured,  state_total_deaths)),
+                                                 columns=["States","Total_Cases","Active", "Recovered", "Deaths"])
                                                             
             
             # Check if missing values
             # df_indian_states.isna().sum()
             
             self.df_indian_states.Total_Cases = self.df_indian_states.Total_Cases.astype(int)
+            self.df_indian_states.Active = self.df_indian_states.Active.astype(int)
             self.df_indian_states.Recovered   = self.df_indian_states.Recovered.astype(int)
             self.df_indian_states.Deaths = self.df_indian_states.Deaths.astype(int)
-
-            # Generating number of Active cases for each Indian state
-            self.df_indian_states['Active'] = self.df_indian_states.Total_Cases - self.df_indian_states.Recovered - self.df_indian_states.Deaths
-                
-            self.df_indian_states = self.df_indian_states[['States','Total_Cases','Active','Recovered','Deaths']]
+            
             self.df_indian_states.sort_values('Total_Cases', ascending=False, inplace=True)
             self.df_indian_states['Mortality_Rate (per 100)'] = np.round(np.nan_to_num(100* self.df_indian_states['Deaths']/self.df_indian_states['Total_Cases']),2)
             self.df_indian_states.reset_index(drop=True,inplace=True)
@@ -476,9 +475,6 @@ class Covid19Tracker:
             #title = "Covid-19 spread across the states in India",
             barmode='stack',
             xaxis_tickangle=-45,
-            autosize=False,
-            width=800,
-            height=800,
         )
         #fig.show()
         return plotly.offline.plot(fig,output_type='div')
